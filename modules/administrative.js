@@ -251,7 +251,7 @@
 							
 							});
 							
-					//console.log(Layer.title+" x:"+x+",y:"+y);
+					console.log(Layer.title+" x:"+x+",y:"+y);
 					// if(x) {
 						
 						// var point = {
