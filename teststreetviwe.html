@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Overlays Within Street View</title>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+    <!-- jsFiddle will insert css and js -->
+  </head>
+  <body>
+    <div id="floating-panel">
+      <input type="button" value="Toggle Street View" id="toggle" />
+    </div>
+    <div id="map"></div>
+
+    <!-- Async script executes immediately and must be after any DOM elements used in callback. -->
+    <script async
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCz0nUSUKnkatTccLfqlN50o1OTTVM0PA0&callback=initMap">
+</script>
+  </body>
+</html>

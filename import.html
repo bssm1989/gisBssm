@@ -1,0 +1,39 @@
+<script src="js/jquery-2.2.4.js"></script>
+<script src="js/xlsx.full.min.js"></script>
+<script>
+function xls2json(url){
+	var oReq = new XMLHttpRequest();
+	oReq.open("GET", url, true);
+	oReq.responseType = "arraybuffer";
+	oReq.onload = function(e) {
+	   var bf = oReq.response;
+		var data = new Uint8Array(bf);
+		var arr = new Array();
+		for (var i = 0; i != data.length; ++i) arr[i] = String.fromCharCode(data[i]);
+		var bstr = arr.join("");
+		var workbook = XLSX.read(bstr, {
+			type: "binary"
+		});
+		var sheet = workbook.SheetNames[0];
+		var worksheet = workbook.Sheets[sheet];
+		var OUT = XLSX.utils.sheet_to_json(worksheet,{raw: true});
+		$.each(OUT,function(i){
+			var d = this;
+			var t = i*20;
+			setTimeout(function(){
+				$.ajax({
+					type:'POST',
+					url:'import.php',
+					data:{data:d},
+					success:function(r){
+						console.log(r);
+					}
+				});
+			},t);
+		});
+		console.log(OUT);
+	}
+	oReq.send();
+}
+xls2json('data.xlsx');
+</script>
